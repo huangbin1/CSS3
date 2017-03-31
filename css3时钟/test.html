@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+.box{
+    width:200px;
+    height:200px;
+    border-radius:100px;
+    border:2px solid pink;
+    margin:80px auto;
+    position:relative;
+}
+.box span{
+    width: 2px;
+    height: 6px;
+    background: pink;
+    position: absolute;
+    left: 99px;
+    top: 0;
+    transform-origin:0 100px;/*定义元素旋转的基点，默认是元素的中心点，该属性只有在设置了transform属性的时候起作用*/
+}
+.box span:nth-child(5n+1){
+    height: 10px;
+}
+
+/*针*/
+#hour{
+    width:6px;
+    height:50px;
+    background:black;
+    position:absolute;
+    left:97px;
+    bottom:100px;
+    transform-origin: 0 50px;
+}
+#min{
+    width:4px;
+    height:60px;
+    background: black;
+    position: absolute;
+    left:98px;
+    bottom:100px;
+    transform-origin: 0 60px;
+}
+#sec{
+    width:2px;
+    height:80px;
+    background: red;
+    position:absolute;
+    left:99px;
+    bottom:100px;
+    transform-origin: 0 80px;
+}
+#centre{
+    width:10px;
+    height:10px;
+    background: red;
+    border-radius:5px;
+    position:absolute;
+    left:95px;
+    top:95px;
+}
+</style>
+<script>
+window.onload=function()
+{
+    var str='';
+    var oDiv=document.getElementById("degree");
+    var oHour=document.getElementById("hour");
+    var oMin=document.getElementById("min");
+    var oSec=document.getElementById("sec");
+    for(i=0;i<60;i++){
+        str+="<span style='-webkit-transform:rotate("+6*i+"deg)'></span>"
+    }
+    oDiv.innerHTML=str;
+    setInterval(function(){
+		toTime(oHour,oMin,oSec);
+	},1000)
+};
+function toTime(oHour,oMin,oSec){
+    var oDate=new Date();
+    var hour=oDate.getHours();
+    var minute=oDate.getMinutes();
+    var sec=oDate.getSeconds();
+    oHour.style.transform="rotate("+hour*30+"deg)";
+    oMin.style.transform="rotate("+minute*6+"deg)";
+    oSec.style.transform="rotate("+sec*6+"deg)";
+
+}
+</script>
+</head>
+<body>
+<div class="box">
+   <div id="degree"></div>
+   <div id="needle">
+        <div id="hour"></div>
+        <div id="min"></div>
+        <div id="sec"></div>
+        <div id="centre"></div>
+    </div>
+<div>
+</body>
+</html>
